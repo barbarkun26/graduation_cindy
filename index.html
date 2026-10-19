@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Graduation & Farewell Cindy! 🎓 S2 Journey at UPH</title>
+  
+  <!-- SEO & Social Meta Tags -->
+  <meta name="description" content="Website perpisahan magang & ucapan selamat menempuh S2 di UPH untuk Cindy (Miss PPG Bertiarap). Penuh doa, tawa, dan kenangan hangat!">
+  <meta name="theme-color" content="#102a45">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Caveat for playful touch -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Floating Confetti & Canvas Layer -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- Navigation Bar -->
+  <header class="navbar" id="topNavbar">
+    <div class="nav-container">
+      <div class="brand">
+        <span class="brand-icon">🎓</span>
+        <div class="brand-text">
+          <span class="brand-title">Cindy's Next Journey</span>
+          <span class="brand-sub">Internship Farewell ➔ S2 UPH</span>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#hero" class="nav-link active">Beranda</a>
+        <a href="#spotlight" class="nav-link">Miss PPG</a>
+        <a href="#stats" class="nav-link">Statistik Lucu</a>
+        <a href="#survival" class="nav-link">S2 Kit</a>
+        <a href="#wishes" class="nav-link">Papan Doa</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="soundToggleBtn" class="icon-btn" title="Nyalakan/Matikan Efek Suara" aria-label="Toggle Sound">
+          <span id="soundIcon">🔊</span>
+        </button>
+        <button id="celebrateBtnNav" class="btn-primary-small">
+          <span>🎉 Lempar Toga!</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION WITH S2 UPH BANNER -->
+    <section class="hero-section" id="hero">
+      <div class="container">
+        
+        <!-- Floating Badges -->
+        <div class="hero-badge-wrap">
+          <span class="pill-badge pulse">
+            <span class="sparkle">✨</span> Official Farewell Edition
+          </span>
+          <span class="pill-badge gold">
+            🏛️ Calon Master UPH (Universitas Pelita Harapan)
+          </span>
+        </div>
+
+        <h1 class="hero-title">
+          Selamat Melangkah ke Babak Baru,<br>
+          <span class="highlight-text">Cindy, S.Pd. ➔ Menuju M.Pd.!</span> 🎓✨
+        </h1>
+        
+        <p class="hero-subtitle">
+          Dari anak magang kesayangan yang bikin suasana kantor selalu ceria, kini siap menaklukkan dunia kampus S2 di UPH! Terima kasih untuk semua kerja keras, senyuman, dan momen serunya.
+        </p>
+
+        <!-- Big Header Photo Frame (Selamat Menempuh S2 di UPH) -->
+        <div class="banner-frame-wrapper">
+          <div class="banner-card">
+            <div class="banner-window-bar">
+              <span class="window-dot red"></span>
+              <span class="window-dot yellow"></span>
+              <span class="window-dot green"></span>
+              <span class="window-title">📸 Kenangan & Langkah Baru: S2 di Universitas Pelita Harapan</span>
+            </div>
+            <div class="banner-img-container">
+              <img 
+                src="assets/Selamat Menempuh S2 di UPH.png" 
+                alt="Selamat Menempuh S2 di UPH Cindy" 
+                class="banner-img"
+                id="mainBannerImg"
+                loading="eager"
+              >
+              <div class="banner-overlay-tag">
+                <span class="tag-pin">📌</span>
+                <span>"Langkah baru, cerita baru, versi terbaik dari kamu! ♡"</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Interaction Bar -->
+        <div class="hero-cta-group">
+          <button id="tossCapBtn" class="btn-hero-primary">
+            <span class="btn-icon">🎓</span>
+            <span>Lempar Toga & Tebar Bintang!</span>
+          </button>
+          <a href="#wishes" class="btn-hero-secondary">
+            <span class="btn-icon">💌</span>
+            <span>Tulis Pesan untuk Cindy</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: MISS PPG SPOTLIGHT (DUAL PHOTO COMPARISON / FUN PROFILE) -->
+    <section class="spotlight-section" id="spotlight">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">👑 The Royalty Award</span>
+          <h2 class="section-title">Penobatan Resmi: <span class="text-gold">"Miss PPG Bertiarap"</span></h2>
+          <p class="section-desc">Gelar prestisius kehormatan dari seluruh tim magang untuk Cindy yang selalu tampil slay di segala situasi!</p>
+        </div>
+
+        <div class="spotlight-grid">
+          
+          <!-- Photo Gallery & Mode Switcher -->
+          <div class="spotlight-visual-card">
+            <div class="mode-tabs">
+              <button class="mode-tab active" data-target="tiara">
+                👑 Mode Miss PPG (Bertiarap)
+              </button>
+              <button class="mode-tab" data-target="casual">
+                ☕ Mode Briefing Santai
+              </button>
+            </div>
+
+            <div class="photo-display-box">
+              <!-- Photo 1: Tiara (Default) -->
+              <div class="photo-frame active" id="photoTiara">
+                <div class="crown-badge-float">👸 100% Slay!</div>
+                <img 
+                  src="assets/Potret Selfie Miss PPG Bertiarap.png" 
+                  alt="Potret Selfie Miss PPG Bertiarap" 
+                  class="spotlight-img"
+                >
+                <div class="photo-caption-sticker sticker-gold">
+                  <span>✨ Lengkap dengan Mahkota & Selempang Miss PPG!</span>
+                </div>
+              </div>
+
+              <!-- Photo 2: Casual Selfie -->
+              <div class="photo-frame" id="photoCasual">
+                <div class="crown-badge-float casual">💼 Siap Briefing</div>
+                <img 
+                  src="assets/Screenshot 2026-10-19 135431.png" 
+                  alt="Selfie Cindy Mode Casual Magang" 
+                  class="spotlight-img"
+                >
+                <div class="photo-caption-sticker sticker-blue">
+                  <span>🌸 Versi original: senyum ramah pembawa kebahagiaan tim</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cindy's Profile Dossier (Fun & Heartwarming) -->
+          <div class="profile-dossier-card">
+            <div class="dossier-header">
+              <span class="dossier-label">IDENTITAS ALUMNI MAGANG</span>
+              <h3 class="dossier-name">Cindy, S.Pd. 👑</h3>
+              <p class="dossier-title">Miss PPG Bertiarap & S2 Scholar Candidate</p>
+            </div>
+
+            <div class="dossier-stats-list">
+              <div class="dossier-item">
+                <span class="d-icon">🏛️</span>
+                <div class="d-info">
+                  <strong>Kampus Tujuan</strong>
+                  <span>Universitas Pelita Harapan (UPH)</span>
+                </div>
+              </div>
+
+              <div class="dossier-item">
+                <span class="d-icon">⭐</span>
+                <div class="d-info">
+                  <strong>Superpower di Kantor</strong>
+                  <span>Menularkan energi positif & senyum manis tanpa henti</span>
+                </div>
+              </div>
+
+              <div class="dossier-item">
+                <span class="d-icon">🎯</span>
+                <div class="d-info">
+                  <strong>Tingkat Kesiapan S2</strong>
+                  <span>99.9% (Tinggal siapin mental ketemu jurnal Scopus!)</span>
+                </div>
+              </div>
+
+              <div class="dossier-item">
+                <span class="d-icon">💖</span>
+                <div class="d-info">
+                  <strong>Status di Hati Rekan Kerja</strong>
+                  <span>Alumni Magang Terbaik yang Nggak Boleh Lupa Sowan!</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="quote-card">
+              <p class="quote-text">
+                “Semoga semua prosesnya lancar, ilmunya bermanfaat, dan banyak hal baik yang menanti di UPH!”
+              </p>
+              <span class="quote-author">— Rekan-rekan Magang Favoritmu ♡</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: FUN STATS (STATISTIK MAGANG YANG LUCU & MENYENTUH) -->
+    <section class="stats-section" id="stats">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">📊 Laporan Akhir Magang</span>
+          <h2 class="section-title">KPI Magang & Fakta Unik Cindy</h2>
+          <p class="section-desc">Hasil audit santai selama masa magang berlangsung:</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card" data-tilt>
+            <div class="stat-icon-wrap bg-blue">☕</div>
+            <div class="stat-number">300+</div>
+            <div class="stat-label">Cangkir Kopi & Minuman Manis</div>
+            <p class="stat-desc">Bahan bakar utama beresin tugas dan brainstorming tanpa kantuk.</p>
+          </div>
+
+          <div class="stat-card" data-tilt>
+            <div class="stat-icon-wrap bg-gold">💯%</div>
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Vibes Ceria & Anti Goyah</div>
+            <p class="stat-desc">Mau revisi sedalam lautan, senyumnya tetap ramah paripurna!</p>
+          </div>
+
+          <div class="stat-card" data-tilt>
+            <div class="stat-icon-wrap bg-pink">👸</div>
+            <div class="stat-number">#1</div>
+            <div class="stat-label">Miss PPG Ter-favorit</div>
+            <p class="stat-desc">Satu-satunya anak magang yang sah mengenakan mahkota & selempang!</p>
+          </div>
+
+          <div class="stat-card" data-tilt>
+            <div class="stat-icon-wrap bg-green">🎓</div>
+            <div class="stat-number">S2</div>
+            <div class="stat-label">UPH Chapter Loading...</div>
+            <p class="stat-desc">Siap jadi akademisi kece dengan gelar master kebanggaan kita semua.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: S2 SURVIVAL KIT (CAMPUS GRADUATION & STUDY HUMOR) -->
+    <section class="survival-section" id="survival">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">🎒 Campus Ready</span>
+          <h2 class="section-title">Cindy's S2 Survival Kit @ UPH</h2>
+          <p class="section-desc">Starter pack wajib untuk Cindy menghadapi perkuliahan S2 di Universitas Pelita Harapan:</p>
+        </div>
+
+        <div class="survival-grid">
+          
+          <div class="kit-item">
+            <div class="kit-check">✅</div>
+            <div class="kit-content">
+              <h4>Koleksi Jilbab & Outfit Kece</h4>
+              <p>Wajib estetik saat presentasi tugas dosen di koridor UPH.</p>
+            </div>
+          </div>
+
+          <div class="kit-item">
+            <div class="kit-check">✅</div>
+            <div class="kit-content">
+              <h4>Stok Sabar & Mental Jurnal</h4>
+              <p>Ketika membaca ratusan PDF jurnal ilmiah berbahasa Inggris tingkat dewa.</p>
+            </div>
+          </div>
+
+          <div class="kit-item">
+            <div class="kit-check">✅</div>
+            <div class="kit-content">
+              <h4>Mantra Sakti Anti Overthinking</h4>
+              <p>"Tenang, skripsi S1 aja lewat, apalagi tesis S2! Slayyyy!"</p>
+            </div>
+          </div>
+
+          <div class="kit-item">
+            <div class="kit-check">✅</div>
+            <div class="kit-content">
+              <h4>Jalur Khusus Curhat ke Teman Magang</h4>
+              <p>Hotline 24/7 selalu siap sedia kalau butuh tempat ngobrol atau ngopi bareng.</p>
+            </div>
+          </div>
+
+          <div class="kit-item">
+            <div class="kit-check">✅</div>
+            <div class="kit-content">
+              <h4>Gelar Miss PPG Tetap Melekat</h4>
+              <p>Mahkota boleh disimpan di lemari, tapi auranya harus tetap dibawa ke kelas!</p>
+            </div>
+          </div>
+
+          <div class="kit-item">
+            <div class="kit-check">✅</div>
+            <div class="kit-content">
+              <h4>Doa & Restu Satu Kantor</h4>
+              <p>Full support dan cinta tanpa syarat agar lulus cepat dengan predikat Cumlaude!</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: INTERACTIVE WALL OF WISHES (STICKY NOTES / GUESTBOOK) -->
+    <section class="wishes-section" id="wishes">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">💌 Wall of Wishes</span>
+          <h2 class="section-title">Papan Doa & Harapan untuk Cindy</h2>
+          <p class="section-desc">Tinggalkan pesan manis, doa tulus, atau wejangan kocak buat Cindy yang mau kuliah S2!</p>
+        </div>
+
+        <div class="wishes-layout">
+          
+          <!-- Sticky Notes Board -->
+          <div class="sticky-board" id="stickyBoard">
+            <!-- Messages will be rendered here by script.js -->
+          </div>
+
+          <!-- Add Wish Form -->
+          <div class="wish-form-card">
+            <div class="form-header">
+              <span class="form-icon">✍️</span>
+              <div>
+                <h3>Kirim Ucapan Baru</h3>
+                <p>Pesanmu langsung nempel di papan doa!</p>
+              </div>
+            </div>
+
+            <form id="wishForm" class="wish-form">
+              <div class="form-group">
+                <label for="senderName">Nama Kamu / Julukan:</label>
+                <input type="text" id="senderName" placeholder="Misal: Kak Sarah / Teman Se-divisi" required>
+              </div>
+
+              <div class="form-group">
+                <label for="senderRole">Hubungan / Tim:</label>
+                <input type="text" id="senderRole" placeholder="Misal: Tim Magang Kece / Divisi IT" required>
+              </div>
+
+              <div class="form-group">
+                <label for="senderMessage">Doa & Pesan buat Cindy:</label>
+                <textarea id="senderMessage" rows="4" placeholder="Tuliskan ucapan selamat S2 atau kenangan magang yang paling berkesan..." required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label>Pilih Warna Kertas Sticky Note:</label>
+                <div class="color-picker-group">
+                  <label class="color-option">
+                    <input type="radio" name="noteColor" value="color-yellow" checked>
+                    <span class="color-swatch bg-note-yellow"></span>
+                  </label>
+                  <label class="color-option">
+                    <input type="radio" name="noteColor" value="color-pink">
+                    <span class="color-swatch bg-note-pink"></span>
+                  </label>
+                  <label class="color-option">
+                    <input type="radio" name="noteColor" value="color-blue">
+                    <span class="color-swatch bg-note-blue"></span>
+                  </label>
+                  <label class="color-option">
+                    <input type="radio" name="noteColor" value="color-green">
+                    <span class="color-swatch bg-note-green"></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Pilih Emoticon Pemanis:</label>
+                <div class="emoji-picker-group">
+                  <label class="emoji-option"><input type="radio" name="noteEmoji" value="🎓" checked><span>🎓</span></label>
+                  <label class="emoji-option"><input type="radio" name="noteEmoji" value="👑"><span>👑</span></label>
+                  <label class="emoji-option"><input type="radio" name="noteEmoji" value="💖"><span>💖</span></label>
+                  <label class="emoji-option"><input type="radio" name="noteEmoji" value="✨"><span>✨</span></label>
+                  <label class="emoji-option"><input type="radio" name="noteEmoji" value="☕"><span>☕</span></label>
+                  <label class="emoji-option"><input type="radio" name="noteEmoji" value="🎉"><span>🎉</span></label>
+                </div>
+              </div>
+
+              <button type="submit" class="btn-submit-wish" id="btnSubmitWish">
+                <span>🚀 Tempel Pesan & Tembak Konfeti!</span>
+              </button>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CELEBRATION CALL-TO-ACTION -->
+    <section class="celebrate-bottom-section">
+      <div class="container text-center">
+        <div class="graduation-cap-icon">🎓</div>
+        <h2 class="bottom-title">Sekali Lagi, Sukses Selalu Cindy!</h2>
+        <p class="bottom-subtitle">Jangan lupa kalau sudah lulus S2 dan jadi Master, traktiran di kantor jangan sampai lolos ya! 🍕☕</p>
+        
+        <div class="big-action-wrap">
+          <button id="bigCelebrationBtn" class="btn-big-party">
+            <span>🎊 Hujan Konfeti & Toga Sekarang! 🎊</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p class="footer-credit">
+        Dibuat dengan segenap rasa bangga & sayang oleh <strong>Rekan-Rekan Magang</strong> untuk <strong>Cindy (Miss PPG Bertiarap)</strong> ❤️
+      </p>
+      <div class="footer-links">
+        <a href="#hero">Kembali ke Atas ⬆️</a>
+      </div>
+      <p class="footer-subtext">Semoga selalu sehat, bahagia, dan sukses menggapai impian di UPH!</p>
+    </div>
+  </footer>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="toast hidden">
+    <span id="toastIcon">🎉</span>
+    <span id="toastMessage">Pesan berhasil ditempel!</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

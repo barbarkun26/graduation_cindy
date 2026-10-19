@@ -7,26 +7,26 @@
 const DEFAULT_WISHES = [
   {
     id: 'seed-1',
-    name: 'Kak Dimas & Tim Magang',
-    role: 'Rekan Se-perjuangan',
-    message: 'Selamat melangkah ke S2 UPH, Cindy! 🎓 Terima kasih udah jadi mood booster kantor dengan senyum 24 karatnya. Jangan lupa kalau tesis lagi pusing, calling-calling kita buat ngopi!',
+    name: 'Bapak Prabowo Subianto',
+    role: 'Presiden RI',
+    message: 'Selamat melangkah ke S2 UPH, Cindy! 🎓 Terima kasih sudah menjadi warga indonesia yang gemoy serta perpendidikan',
     color: 'color-yellow',
     emoji: '🎓',
     date: 'Hari ini'
   },
   {
     id: 'seed-2',
-    name: 'Mbak Ririn',
-    role: 'Mentor Favorit',
-    message: 'Miss PPG Bertiarap resmi lulus magang dengan predikat: Paling Rajin & Paling Ceria! 👑 Kuliah S2 di UPH pasti lancar jaya. Bangga banget sama kamu, Cin!',
+    name: 'Haji Isam',
+    role: 'Granpa',
+    message: 'selamat dan sukses selalu cucuku',
     color: 'color-pink',
     emoji: '👑',
     date: 'Kemarin'
   },
   {
     id: 'seed-3',
-    name: 'Bagas & Andre',
-    role: 'Partner Berburu Jajan',
+    name: 'Gibran Rakabuming',
+    role: 'RI 2',
     message: 'Nggak ada lagi yang ngingetin pesan es kopi pas jam 2 siang ☕🥲. Sukses terus Cindy! Pokoknya nanti pas wisuda S2 UPH kita kirim karangan bunga paling heboh!',
     color: 'color-blue',
     emoji: '☕',
@@ -34,7 +34,7 @@ const DEFAULT_WISHES = [
   },
   {
     id: 'seed-4',
-    name: 'Keluarga Besar Kantor',
+    name: 'PPG',
     role: 'Fans Garis Keras Cindy',
     message: 'Langkah baru, cerita baru, versi terbaik dari kamu! ♡ Selamat fokus S2 di UPH. Semoga ilmunya berkah, lancar tesisnya, dan segera menyandang gelar Master! ✨',
     color: 'color-green',

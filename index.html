@@ -35,6 +35,7 @@
       <nav class="nav-links">
         <a href="#hero" class="nav-link active">Beranda</a>
         <a href="#spotlight" class="nav-link">Miss PPG</a>
+        <a href="#memories" class="nav-link">Memories 📸</a>
         <a href="#stats" class="nav-link">Statistik Lucu</a>
         <a href="#survival" class="nav-link">S2 Kit</a>
         <a href="#wishes" class="nav-link">Papan Doa</a>
@@ -77,12 +78,27 @@
 
         <!-- Big Header Photo Frame (Selamat Menempuh S2 di UPH) -->
         <div class="banner-frame-wrapper">
-          <div class="banner-card">
+          <div 
+            class="banner-card" 
+            id="mainBannerCard" 
+            role="button" 
+            tabindex="0" 
+            aria-haspopup="dialog" 
+            aria-label="Klik untuk memperbesar banner ke layar penuh dan melihat gambar jernih HD"
+            title="Klik untuk memperbesar banner (HD)"
+          >
             <div class="banner-window-bar">
-              <span class="window-dot red"></span>
-              <span class="window-dot yellow"></span>
-              <span class="window-dot green"></span>
+              <div class="window-dots">
+                <span class="window-dot red"></span>
+                <span class="window-dot yellow"></span>
+                <span class="window-dot green"></span>
+              </div>
               <span class="window-title">📸 Kenangan & Langkah Baru: S2 di Universitas Pelita Harapan</span>
+              <div class="banner-expand-badge">
+                <span class="badge-sparkle">✨</span>
+                <span>Klik untuk Perbesar (HD)</span>
+                <span class="badge-icon">🔍</span>
+              </div>
             </div>
             <div class="banner-img-container">
               <img 
@@ -95,6 +111,16 @@
               <div class="banner-overlay-tag">
                 <span class="tag-pin">📌</span>
                 <span>"Langkah baru, cerita baru, versi terbaik dari kamu! ♡"</span>
+              </div>
+              <div class="banner-zoom-overlay">
+                <div class="zoom-pill">
+                  <span class="zoom-pill-icon">🔍</span>
+                  <div class="zoom-pill-text-wrap">
+                    <span class="zoom-pill-main">Perbesar Layar Penuh</span>
+                    <span class="zoom-pill-sub">Tampilan Tajam & Ultra HD (1774×887)</span>
+                  </div>
+                  <span class="zoom-pill-badge">KLIK DISINI</span>
+                </div>
               </div>
             </div>
           </div>
@@ -217,6 +243,350 @@
           </div>
 
         </div>
+      </div>
+    </section>
+
+    <!-- SECTION: MEMORIES GALLERY (2-KOLOM BESAR DENGAN MODAL DETAIL ULTRA HD) -->
+    <section class="memories-section" id="memories">
+      <div class="container">
+        
+        <div class="section-header text-center">
+          <div class="memories-badge-wrap">
+            <span class="section-tag">🎞️ Nostalgia & Kebersamaan</span>
+            <span class="pill-badge gold">📸 7 Momen Terbaik Cindy</span>
+          </div>
+          <h2 class="section-title">Galeri Kenangan: <span class="highlight-text">Tawa, Cerita & Kerja Bareng</span> ✨</h2>
+          <p class="section-desc">
+            Kumpulan potret seru selama perjalanan magang bersama Cindy. Klik foto mana saja untuk memperbesar ke layar penuh (HD), melihat detail ekspresi, dan membaca ceritanya!
+          </p>
+        </div>
+
+        <div class="memories-grid">
+
+          <!-- Memory Card 1 -->
+          <article 
+            class="memory-card" 
+            role="button" 
+            tabindex="0" 
+            data-memory-idx="0"
+            data-src="assets/memories/atsApp Image 2026-10-19 at 16.23.01.jpeg"
+            data-title="☕ Makan Siang & Bestie Vibes"
+            data-res="2340 × 4160 PX (Ultra HD)"
+            data-w="2340"
+            data-h="4160"
+            data-desc="Momen makan siang penuh tawa, es kopi andalan, dan obrolan seru di sela jam kerja bersama Cindy yang selalu membawa aura positif."
+            aria-label="Lihat detail foto Makan Siang & Bestie Vibes"
+          >
+            <div class="memory-img-box">
+              <img 
+                src="assets/memories/atsApp Image 2026-10-19 at 16.23.01.jpeg" 
+                alt="Makan Siang & Bestie Vibes Cindy"
+                class="memory-img"
+                loading="lazy"
+              >
+              <div class="memory-card-overlay">
+                <span class="overlay-zoom-pill">
+                  <span class="pill-icon">🔍</span> Klik untuk Detail Fullscreen HD
+                </span>
+              </div>
+              <span class="memory-tag-badge">🍽️ Lunch Squad</span>
+            </div>
+            <div class="memory-card-body">
+              <div class="memory-meta">
+                <span class="memory-location">📍 Food Court Corner</span>
+                <span class="memory-res-badge">2340 × 4160 PX</span>
+              </div>
+              <h3 class="memory-title">☕ Makan Siang & Bestie Vibes</h3>
+              <p class="memory-desc">
+                Momen makan siang penuh tawa, es kopi andalan, dan obrolan seru di sela jam kerja bersama Cindy yang selalu membawa aura positif.
+              </p>
+              <div class="memory-card-footer">
+                <span class="btn-view-detail">
+                  <span>Buka Foto Penuh (HD)</span>
+                  <span class="arrow-icon">➔</span>
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Memory Card 2 -->
+          <article 
+            class="memory-card" 
+            role="button" 
+            tabindex="0" 
+            data-memory-idx="1"
+            data-src="assets/memories/pp Image 2026-10-19 at 16.24.17.jpeg"
+            data-title="✌️ Pose Kompak Meja Bundar"
+            data-res="4160 × 2340 PX (Ultra HD 4K)"
+            data-w="4160"
+            data-h="2340"
+            data-desc="Tumbler Stanley siap siaga, tangan kompak pose gaul! Kebersamaan tim magang yang selalu heboh, akrab, dan bikin kangen."
+            aria-label="Lihat detail foto Pose Kompak Meja Bundar"
+          >
+            <div class="memory-img-box">
+              <img 
+                src="assets/memories/pp Image 2026-10-19 at 16.24.17.jpeg" 
+                alt="Pose Kompak Meja Bundar Magang Cindy"
+                class="memory-img"
+                loading="lazy"
+              >
+              <div class="memory-card-overlay">
+                <span class="overlay-zoom-pill">
+                  <span class="pill-icon">🔍</span> Klik untuk Detail Fullscreen HD
+                </span>
+              </div>
+              <span class="memory-tag-badge gold">😎 Full Team Vibes</span>
+            </div>
+            <div class="memory-card-body">
+              <div class="memory-meta">
+                <span class="memory-location">📍 Meja Makan Favorit</span>
+                <span class="memory-res-badge">4160 × 2340 PX</span>
+              </div>
+              <h3 class="memory-title">✌️ Pose Kompak Meja Bundar</h3>
+              <p class="memory-desc">
+                Tumbler Stanley siap siaga, tangan kompak pose gaul! Kebersamaan tim magang yang selalu heboh, akrab, dan bikin kangen.
+              </p>
+              <div class="memory-card-footer">
+                <span class="btn-view-detail">
+                  <span>Buka Foto Penuh (HD)</span>
+                  <span class="arrow-icon">➔</span>
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Memory Card 3 -->
+          <article 
+            class="memory-card" 
+            role="button" 
+            tabindex="0" 
+            data-memory-idx="2"
+            data-src="assets/memories/hatsApp Image 2026-10-19 at 16.23.01.jpeg"
+            data-title="🪞 Mirror Selfie Lift Batik Squad"
+            data-res="900 × 1600 PX"
+            data-w="900"
+            data-h="1600"
+            data-desc="Tradisi wajib pulang kantor: selfie cermin di lift kantor dengan batik penuh warna dan pose paling slay bareng Cindy!"
+            aria-label="Lihat detail foto Mirror Selfie Lift Batik Squad"
+          >
+            <div class="memory-img-box">
+              <img 
+                src="assets/memories/hatsApp Image 2026-10-19 at 16.23.01.jpeg" 
+                alt="Mirror Selfie Lift Batik Cindy"
+                class="memory-img"
+                loading="lazy"
+              >
+              <div class="memory-card-overlay">
+                <span class="overlay-zoom-pill">
+                  <span class="pill-icon">🔍</span> Klik untuk Detail Fullscreen HD
+                </span>
+              </div>
+              <span class="memory-tag-badge">👔 Batik Thursday</span>
+            </div>
+            <div class="memory-card-body">
+              <div class="memory-meta">
+                <span class="memory-location">📍 Office Lift Mirror</span>
+                <span class="memory-res-badge">900 × 1600 PX</span>
+              </div>
+              <h3 class="memory-title">🪞 Mirror Selfie Lift Batik Squad</h3>
+              <p class="memory-desc">
+                Tradisi wajib pulang kantor: selfie cermin di lift kantor dengan batik penuh warna dan pose paling slay bareng Cindy!
+              </p>
+              <div class="memory-card-footer">
+                <span class="btn-view-detail">
+                  <span>Buka Foto Penuh (HD)</span>
+                  <span class="arrow-icon">➔</span>
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Memory Card 4 -->
+          <article 
+            class="memory-card" 
+            role="button" 
+            tabindex="0" 
+            data-memory-idx="3"
+            data-src="assets/memories/WhatsApp Image 2026-10-19 at 16.23.01.jpeg"
+            data-title="🇮🇩 Dirgahayu Squad BSI & Danantara"
+            data-res="720 × 1280 PX"
+            data-w="720"
+            data-h="1280"
+            data-desc="Semangat kemerdekaan dengan kostum merah putih di photobooth kantor. Bukti Cindy dan tim selalu antusias di setiap momen!"
+            aria-label="Lihat detail foto Dirgahayu Squad BSI"
+          >
+            <div class="memory-img-box">
+              <img 
+                src="assets/memories/WhatsApp Image 2026-10-19 at 16.23.01.jpeg" 
+                alt="Dirgahayu Squad BSI & Danantara Cindy"
+                class="memory-img"
+                loading="lazy"
+              >
+              <div class="memory-card-overlay">
+                <span class="overlay-zoom-pill">
+                  <span class="pill-icon">🔍</span> Klik untuk Detail Fullscreen HD
+                </span>
+              </div>
+              <span class="memory-tag-badge red">🔴 Semarak 17-an</span>
+            </div>
+            <div class="memory-card-body">
+              <div class="memory-meta">
+                <span class="memory-location">📍 Danantara & BSI Photobooth</span>
+                <span class="memory-res-badge">720 × 1280 PX</span>
+              </div>
+              <h3 class="memory-title">🇮🇩 Dirgahayu Squad BSI & Danantara</h3>
+              <p class="memory-desc">
+                Semangat kemerdekaan dengan kostum merah putih di photobooth kantor. Bukti Cindy dan tim selalu antusias di setiap momen!
+              </p>
+              <div class="memory-card-footer">
+                <span class="btn-view-detail">
+                  <span>Buka Foto Penuh (HD)</span>
+                  <span class="arrow-icon">➔</span>
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Memory Card 5 -->
+          <article 
+            class="memory-card" 
+            role="button" 
+            tabindex="0" 
+            data-memory-idx="4"
+            data-src="assets/memories/tsApp Image 2026-10-19 at 16.23.01.jpeg"
+            data-title="🍰 Nongkrong Hangat di Cafe"
+            data-res="720 × 1280 PX"
+            data-w="720"
+            data-h="1280"
+            data-desc="Ngobrol santai setelah jam kerja. Pertemanan magang yang hangat dan bakal berlanjut terus sampai nanti Cindy wisuda S2!"
+            aria-label="Lihat detail foto Nongkrong Hangat di Cafe"
+          >
+            <div class="memory-img-box">
+              <img 
+                src="assets/memories/tsApp Image 2026-10-19 at 16.23.01.jpeg" 
+                alt="Nongkrong Cafe Bareng Cindy"
+                class="memory-img"
+                loading="lazy"
+              >
+              <div class="memory-card-overlay">
+                <span class="overlay-zoom-pill">
+                  <span class="pill-icon">🔍</span> Klik untuk Detail Fullscreen HD
+                </span>
+              </div>
+              <span class="memory-tag-badge">☕ Cozy Hangout</span>
+            </div>
+            <div class="memory-card-body">
+              <div class="memory-meta">
+                <span class="memory-location">📍 Cafe Corner</span>
+                <span class="memory-res-badge">720 × 1280 PX</span>
+              </div>
+              <h3 class="memory-title">🍰 Nongkrong Hangat di Cafe</h3>
+              <p class="memory-desc">
+                Ngobrol santai setelah jam kerja. Pertemanan magang yang hangat dan bakal berlanjut terus sampai nanti Cindy wisuda S2!
+              </p>
+              <div class="memory-card-footer">
+                <span class="btn-view-detail">
+                  <span>Buka Foto Penuh (HD)</span>
+                  <span class="arrow-icon">➔</span>
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Memory Card 6 -->
+          <article 
+            class="memory-card" 
+            role="button" 
+            tabindex="0" 
+            data-memory-idx="5"
+            data-src="assets/memories/age 2026-10-19 at 16.24.52.jpeg"
+            data-title="🍩 Donat Manis & Penyerahan Gelar"
+            data-res="1600 × 1200 PX"
+            data-w="1600"
+            data-h="1200"
+            data-desc="Telunjuk semua orang kompak menunjuk Cindy si bintang utama! Dilengkapi donat manis sebagai simbol perpisahan yang tak terlupakan."
+            aria-label="Lihat detail foto Donat Manis & Penyerahan Gelar"
+          >
+            <div class="memory-img-box">
+              <img 
+                src="assets/memories/age 2026-10-19 at 16.24.52.jpeg" 
+                alt="Donat Manis Perayaan Kantor Cindy"
+                class="memory-img"
+                loading="lazy"
+              >
+              <div class="memory-card-overlay">
+                <span class="overlay-zoom-pill">
+                  <span class="pill-icon">🔍</span> Klik untuk Detail Fullscreen HD
+                </span>
+              </div>
+              <span class="memory-tag-badge gold">👑 Ratu Magang</span>
+            </div>
+            <div class="memory-card-body">
+              <div class="memory-meta">
+                <span class="memory-location">📍 Main Office PPG</span>
+                <span class="memory-res-badge">1600 × 1200 PX</span>
+              </div>
+              <h3 class="memory-title">🍩 Donat Manis & Penyerahan Gelar</h3>
+              <p class="memory-desc">
+                Telunjuk semua orang kompak menunjuk Cindy si bintang utama! Dilengkapi donat manis sebagai simbol perpisahan yang tak terlupakan.
+              </p>
+              <div class="memory-card-footer">
+                <span class="btn-view-detail">
+                  <span>Buka Foto Penuh (HD)</span>
+                  <span class="arrow-icon">➔</span>
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Memory Card 7 (Highlight Card) -->
+          <article 
+            class="memory-card memory-card-wide" 
+            role="button" 
+            tabindex="0" 
+            data-memory-idx="6"
+            data-src="assets/memories/Image 2026-10-19 at 16.24.52.jpeg"
+            data-title="✨ Kenangan Abadi Keluarga Magang"
+            data-res="1600 × 1200 PX"
+            data-w="1600"
+            data-h="1200"
+            data-desc="Foto keluarga besar tim magang yang penuh cerita dan kehangatan. Cindy bukan sekadar rekan magang, tapi keluarga selamanya!"
+            aria-label="Lihat detail foto Kenangan Abadi Keluarga Magang"
+          >
+            <div class="memory-img-box">
+              <img 
+                src="assets/memories/Image 2026-10-19 at 16.24.52.jpeg" 
+                alt="Kenangan Abadi Keluarga Magang Cindy"
+                class="memory-img"
+                loading="lazy"
+              >
+              <div class="memory-card-overlay">
+                <span class="overlay-zoom-pill">
+                  <span class="pill-icon">🔍</span> Klik untuk Detail Fullscreen HD
+                </span>
+              </div>
+              <span class="memory-tag-badge pink">💖 Forever Squad</span>
+            </div>
+            <div class="memory-card-body">
+              <div class="memory-meta">
+                <span class="memory-location">📍 Gedung Kantor Pusat</span>
+                <span class="memory-res-badge">1600 × 1200 PX</span>
+              </div>
+              <h3 class="memory-title">✨ Kenangan Abadi Keluarga Magang</h3>
+              <p class="memory-desc">
+                Foto keluarga besar tim magang yang penuh cerita dan kehangatan. Cindy bukan sekadar rekan magang, tapi keluarga selamanya!
+              </p>
+              <div class="memory-card-footer">
+                <span class="btn-view-detail">
+                  <span>Buka Foto Penuh (HD)</span>
+                  <span class="arrow-icon">➔</span>
+                </span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
       </div>
     </section>
 
@@ -439,6 +809,164 @@
       <p class="footer-subtext">Semoga selalu sehat, bahagia, dan sukses menggapai impian di UPH!</p>
     </div>
   </footer>
+
+  <!-- ==========================================================
+       FULLSCREEN ULTRA-HD IMAGE VIEWER MODAL (<dialog>)
+       With Light-Dismiss, Pan & Drag, Zooming, and Clarity Enhancer
+       ========================================================== -->
+  <dialog id="bannerModal" class="banner-modal" closedby="any" aria-labelledby="modalTitle">
+    <div class="modal-shell" id="modalShell">
+      
+      <!-- Modal Header Bar -->
+      <header class="modal-header">
+        <div class="modal-header-left">
+          <div class="modal-window-dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <div class="modal-header-info">
+            <h2 id="modalTitle" class="modal-title">
+              📸 Banner Wisuda Cindy — S2 di UPH
+            </h2>
+            <div class="modal-badges">
+              <span class="badge-resolution" id="modalResolutionBadge">1774 × 887 PX</span>
+              <span class="badge-hd-status" id="modalHdTag">✨ MODE ULTRA HD AKTIF</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-header-actions">
+          <div class="zoom-level-pill" id="zoomLevelIndicator" title="Tingkat Pembesaran Layar">
+            Fit (100%)
+          </div>
+
+          <button type="button" id="btnToggleFullscreen" class="modal-action-btn" title="Mode Layar Penuh (F11 / Fullscreen)" aria-label="Toggle Fullscreen">
+            <span class="btn-icon">⛶</span>
+            <span class="btn-text">Layar Penuh</span>
+          </button>
+          
+          <button type="button" id="btnCloseModal" class="modal-close-btn" title="Tutup Modal (Esc atau klik di luar)" aria-label="Tutup">
+            <span>✕</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Floating Toolbar Controls for Zoom & Clarity -->
+      <div class="modal-toolbar-wrap">
+        <div class="modal-toolbar">
+          
+          <div class="toolbar-btn-group">
+            <button type="button" id="btnZoomOut" class="toolbar-btn" title="Perkecil Gambar (-)">
+              <span class="tb-icon">➖</span>
+              <span class="tb-label">Perkecil</span>
+            </button>
+            <button type="button" id="btnZoomIn" class="toolbar-btn" title="Perbesar Gambar (+)">
+              <span class="tb-icon">➕</span>
+              <span class="tb-label">Perbesar</span>
+            </button>
+          </div>
+
+          <div class="toolbar-divider"></div>
+
+          <div class="toolbar-btn-group">
+            <button type="button" id="btnFitScreen" class="toolbar-btn active-mode" title="Sesuaikan Tampilan dengan Ukuran Layar">
+              <span class="tb-icon">🔄</span>
+              <span class="tb-label">Fit Layar</span>
+            </button>
+            <button type="button" id="btnActualSize" class="toolbar-btn" title="Tampilkan Ukuran 100% Asli (Pixel-to-Pixel Paling Tajam)">
+              <span class="tb-icon">🎯</span>
+              <span class="tb-label">100% Asli</span>
+            </button>
+            <button type="button" id="btnZoom2x" class="toolbar-btn" title="Perbesar 200% untuk Membaca Detail Pesan & Gambar">
+              <span class="tb-icon">🔬</span>
+              <span class="tb-label">200% Detail</span>
+            </button>
+          </div>
+
+          <div class="toolbar-divider"></div>
+
+          <!-- ENHANCE CLARITY / ULTRA HD FILTER TOGGLE -->
+          <div class="toolbar-btn-group">
+            <button type="button" id="btnToggleHD" class="toolbar-btn btn-hd-toggle active" title="Nyalakan/Matikan Peningkatan Ketajaman Gambar (Clarity & Contrast Boost)">
+              <span class="tb-icon">✨</span>
+              <span id="hdBtnLabel" class="tb-label">Mode Jernih: Aktif</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Interactive Viewport for Panning and Zooming -->
+      <div class="modal-viewport" id="modalViewport" tabindex="0" aria-label="Area interaktif gambar. Gunakan scroll untuk zoom dan drag untuk menggeser.">
+        <div class="modal-image-wrapper" id="modalImageWrapper">
+          <img 
+            id="modalImage" 
+            src="assets/Selamat Menempuh S2 di UPH.png" 
+            alt="Selamat Menempuh S2 di UPH Cindy - Resolusi Penuh HD" 
+            class="modal-img-element hd-enhanced"
+            draggable="false"
+          >
+        </div>
+
+        <!-- Gallery / Memories Navigation Arrows -->
+        <button type="button" id="btnPrevMedia" class="modal-nav-arrow prev" title="Foto Sebelumnya (⬅ atau Panah Kiri)" aria-label="Foto Sebelumnya">
+          <span>‹</span>
+        </button>
+        <button type="button" id="btnNextMedia" class="modal-nav-arrow next" title="Foto Selanjutnya (➔ atau Panah Kanan)" aria-label="Foto Selanjutnya">
+          <span>›</span>
+        </button>
+      </div>
+
+      <!-- Modal Bottom Information Bar -->
+      <footer class="modal-footer-bar">
+        <div class="modal-footer-left">
+          <div class="modal-footer-tip">
+            <span class="tip-icon">💡</span>
+            <span class="tip-text">Scroll untuk zoom • Drag untuk geser • Double-click zoom 2x</span>
+          </div>
+          <p id="modalCaptionText" class="modal-caption-text"></p>
+        </div>
+        <div class="modal-footer-stats">
+          <span class="footer-badge" id="modalFooterBadge">🎓 Cindy Agustiani, S.H. ➔ Menuju M.Kn. UPH</span>
+        </div>
+      </footer>
+
+    </div>
+  </dialog>
+
+  <!-- ==========================================================
+       BACKGROUND MUSIC (Radja - Cinderella, Reff 01:30 - 02:10)
+       ========================================================== -->
+  <audio 
+    id="bgMusic" 
+    src="assets/backsound/Radja%20-%20Cinderella%20(%20Lyrics%20Video%20).mp3" 
+    preload="auto"
+  ></audio>
+
+  <!-- FLOATING MUSIC BADGE / PLAYER -->
+  <aside 
+    id="musicPlayerBadge" 
+    class="music-floating-pill" 
+    role="button" 
+    tabindex="0" 
+    aria-label="Putar atau jeda backsound Cinderella"
+    title="Klik untuk Jeda / Putar Backsound Cinderella"
+  >
+    <div class="music-disc-wrap">
+      <div class="music-disc" id="musicDisc">💿</div>
+    </div>
+    <div class="music-details">
+      <span class="music-track-name">Radja — Cinderella 👑</span>
+      <span class="music-time-tag" id="musicStatusTag">Reff Cindy (01:30 - 02:10)</span>
+    </div>
+    <div class="music-eq-bars" id="musicEq" aria-hidden="true">
+      <span class="eq-bar bar1"></span>
+      <span class="eq-bar bar2"></span>
+      <span class="eq-bar bar3"></span>
+      <span class="eq-bar bar4"></span>
+    </div>
+  </aside>
 
   <!-- TOAST NOTIFICATION -->
   <div id="toast" class="toast hidden">

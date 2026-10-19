@@ -260,14 +260,161 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- SOUND TOGGLE ---
+  // --- SOUND & BACKSOUND CONTROLLER (Radja - Cinderella, 01:30 - 02:10) ---
   const soundBtn = document.getElementById('soundToggleBtn');
   const soundIcon = document.getElementById('soundIcon');
+  const bgMusic = document.getElementById('bgMusic');
+  const musicBadge = document.getElementById('musicPlayerBadge');
+  const musicStatusTag = document.getElementById('musicStatusTag');
 
-  soundBtn.addEventListener('click', () => {
-    const isEnabled = sfx.toggle();
-    soundIcon.textContent = isEnabled ? '🔊' : '🔇';
-    showToast(isEnabled ? 'Efek Suara Diaktifkan 🎵' : 'Efek Suara Dimatikan 🔇');
+  const MUSIC_START_TIME = 90;  // 01:30 in seconds (1m 30s)
+  const MUSIC_END_TIME = 130;  // 02:10 in seconds (2m 10s)
+  let isBacksoundActive = false;
+
+  function updateMusicUI(playing) {
+    isBacksoundActive = playing;
+    if (playing) {
+      if (soundIcon) soundIcon.textContent = '🔊';
+      if (musicBadge) {
+        musicBadge.classList.add('is-playing');
+        musicBadge.classList.remove('is-paused');
+      }
+      if (musicStatusTag) musicStatusTag.textContent = 'Reff Cindy (01:30 - 02:10)';
+    } else {
+      if (soundIcon) soundIcon.textContent = '🔇';
+      if (musicBadge) {
+        musicBadge.classList.remove('is-playing');
+        musicBadge.classList.add('is-paused');
+      }
+      if (musicStatusTag) musicStatusTag.textContent = 'Jeda • Klik untuk Putar';
+    }
+  }
+
+  function playBacksound() {
+    if (!bgMusic) return;
+    try {
+      if (bgMusic.currentTime < MUSIC_START_TIME || bgMusic.currentTime >= MUSIC_END_TIME) {
+        bgMusic.currentTime = MUSIC_START_TIME;
+      }
+      bgMusic.volume = 0.65;
+      const playPromise = bgMusic.play();
+
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            updateMusicUI(true);
+            sfx.enabled = true;
+          })
+          .catch((err) => {
+            // Autoplay policy prevented immediate unmuted playback
+            console.log('Autoplay deferred until user interaction:', err);
+            updateMusicUI(false);
+            if (musicStatusTag) {
+              musicStatusTag.textContent = '👆 Klik untuk Putar Lagu Cindy';
+            }
+
+            // Listen for the very first interaction to start playback
+            const triggerPlaybackOnInteraction = () => {
+              if (bgMusic.paused) {
+                if (bgMusic.currentTime < MUSIC_START_TIME || bgMusic.currentTime >= MUSIC_END_TIME) {
+                  bgMusic.currentTime = MUSIC_START_TIME;
+                }
+                bgMusic.play()
+                  .then(() => {
+                    updateMusicUI(true);
+                    sfx.enabled = true;
+                    showToast('🎵 Memutar Backsound: Radja - Cinderella (Cindy Edition)');
+                  })
+                  .catch(() => {});
+              }
+              window.removeEventListener('click', triggerPlaybackOnInteraction);
+              window.removeEventListener('touchstart', triggerPlaybackOnInteraction);
+              window.removeEventListener('scroll', triggerPlaybackOnInteraction);
+              window.removeEventListener('keydown', triggerPlaybackOnInteraction);
+            };
+
+            window.addEventListener('click', triggerPlaybackOnInteraction, { once: true });
+            window.addEventListener('touchstart', triggerPlaybackOnInteraction, { once: true });
+            window.addEventListener('scroll', triggerPlaybackOnInteraction, { once: true });
+            window.addEventListener('keydown', triggerPlaybackOnInteraction, { once: true });
+          });
+      }
+    } catch (e) {
+      console.warn('Audio playback error:', e);
+    }
+  }
+
+  function pauseBacksound() {
+    if (!bgMusic) return;
+    bgMusic.pause();
+    updateMusicUI(false);
+    sfx.enabled = false;
+  }
+
+  function toggleBacksound() {
+    if (!bgMusic) return;
+    if (bgMusic.paused) {
+      playBacksound();
+      showToast('🎵 Memutar Backsound: Radja - Cinderella 👑');
+    } else {
+      pauseBacksound();
+      showToast('🔇 Backsound & Efek Suara Dimatikan');
+    }
+  }
+
+  if (bgMusic) {
+    // Keep playback strictly between 01:30 (90s) and 02:10 (130s)
+    bgMusic.addEventListener('loadedmetadata', () => {
+      bgMusic.currentTime = MUSIC_START_TIME;
+    });
+
+    bgMusic.addEventListener('timeupdate', () => {
+      // Loop back to 01:30 when reaching 02:10
+      if (bgMusic.currentTime >= MUSIC_END_TIME) {
+        bgMusic.currentTime = MUSIC_START_TIME;
+        if (!bgMusic.paused) {
+          bgMusic.play().catch(() => {});
+        }
+      }
+    });
+
+    bgMusic.addEventListener('seeking', () => {
+      if (bgMusic.currentTime < MUSIC_START_TIME || bgMusic.currentTime > MUSIC_END_TIME) {
+        bgMusic.currentTime = MUSIC_START_TIME;
+      }
+    });
+
+    bgMusic.addEventListener('ended', () => {
+      bgMusic.currentTime = MUSIC_START_TIME;
+      bgMusic.play().catch(() => {});
+    });
+
+    // Start playback immediately when web opens
+    playBacksound();
+  }
+
+  // Toggle button event listeners
+  if (soundBtn) {
+    soundBtn.addEventListener('click', toggleBacksound);
+  }
+
+  if (musicBadge) {
+    musicBadge.addEventListener('click', toggleBacksound);
+    musicBadge.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleBacksound();
+      }
+    });
+  }
+
+  // Press 'm' to mute/unmute
+  window.addEventListener('keydown', (e) => {
+    // Only if not currently typing in a text field
+    if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
+    if (e.key.toLowerCase() === 'm') {
+      toggleBacksound();
+    }
   });
 
   // --- PHOTO MODE TABS (MISS PPG SPOTLIGHT) ---
@@ -440,4 +587,473 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // --- 5. ULTRA-HD IMAGE VIEWER & FULLSCREEN BANNER MODAL ---
+  const bannerModal = document.getElementById('bannerModal');
+  const modalShell = document.getElementById('modalShell');
+  const modalImage = document.getElementById('modalImage');
+  const modalImageWrapper = document.getElementById('modalImageWrapper');
+  const modalViewport = document.getElementById('modalViewport');
+  const zoomLevelIndicator = document.getElementById('zoomLevelIndicator');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalResolutionBadge = document.getElementById('modalResolutionBadge');
+  const modalCaptionText = document.getElementById('modalCaptionText');
+  const modalHdTag = document.getElementById('modalHdTag');
+  const hdBtnLabel = document.getElementById('hdBtnLabel');
+  const btnToggleHD = document.getElementById('btnToggleHD');
+  const btnZoomIn = document.getElementById('btnZoomIn');
+  const btnZoomOut = document.getElementById('btnZoomOut');
+  const btnFitScreen = document.getElementById('btnFitScreen');
+  const btnActualSize = document.getElementById('btnActualSize');
+  const btnZoom2x = document.getElementById('btnZoom2x');
+  const btnToggleFullscreen = document.getElementById('btnToggleFullscreen');
+  const btnCloseModal = document.getElementById('btnCloseModal');
+  const btnPrevMedia = document.getElementById('btnPrevMedia');
+  const btnNextMedia = document.getElementById('btnNextMedia');
+  const mainBannerCard = document.getElementById('mainBannerCard');
+
+  if (bannerModal && modalImage && modalViewport) {
+    let currentScale = 1;
+    let panX = 0;
+    let panY = 0;
+    let isDragging = false;
+    let dragStartX = 0;
+    let dragStartY = 0;
+    let isHdActive = true;
+    let naturalWidth = 1774;
+    let naturalHeight = 887;
+    let activeMemoryIndex = -1;
+
+    // Collect all memory cards data for gallery slideshow
+    const memoryCards = document.querySelectorAll('.memory-card');
+    const memoriesData = Array.from(memoryCards).map((card, idx) => ({
+      idx: idx,
+      src: card.getAttribute('data-src'),
+      title: card.getAttribute('data-title'),
+      res: card.getAttribute('data-res'),
+      w: parseInt(card.getAttribute('data-w') || '1600', 10),
+      h: parseInt(card.getAttribute('data-h') || '1200', 10),
+      desc: card.getAttribute('data-desc') || ''
+    }));
+
+    // Calculate optimal scale to fit image entirely inside viewport
+    function calculateFitScale() {
+      const padX = 40;
+      const padY = 40;
+      const availW = Math.max(modalViewport.clientWidth - padX, 200);
+      const availH = Math.max(modalViewport.clientHeight - padY, 200);
+
+      const scaleW = availW / naturalWidth;
+      const scaleH = availH / naturalHeight;
+      return Math.min(scaleW, scaleH, 1.0);
+    }
+
+    // Apply 2D transform and scale
+    function applyTransform(animate = false) {
+      if (animate) {
+        modalImageWrapper.style.transition = 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)';
+      } else {
+        modalImageWrapper.style.transition = 'none';
+      }
+
+      modalImageWrapper.style.transform = `translate(calc(-50% + ${panX}px), calc(-50% + ${panY}px)) scale(${currentScale})`;
+
+      // Update zoom percentage badge
+      if (zoomLevelIndicator) {
+        const percent = Math.round(currentScale * 100);
+        zoomLevelIndicator.textContent = `${percent}%`;
+      }
+    }
+
+    // Open image in fullscreen HD viewer with caption and memory index
+    function openViewer(src, titleText, resText, natW, natH, captionText = '', memoryIdx = -1) {
+      modalImage.src = src;
+      naturalWidth = natW || 1774;
+      naturalHeight = natH || 887;
+      modalImage.style.width = naturalWidth + 'px';
+      modalImage.style.height = naturalHeight + 'px';
+
+      activeMemoryIndex = memoryIdx;
+
+      if (modalTitle) modalTitle.innerHTML = titleText;
+      if (modalResolutionBadge) modalResolutionBadge.textContent = resText;
+      if (modalCaptionText) {
+        modalCaptionText.textContent = captionText;
+        modalCaptionText.style.display = captionText ? 'block' : 'none';
+      }
+
+      // Show/hide navigation arrows based on whether it's a memory photo
+      if (btnPrevMedia && btnNextMedia) {
+        const showNav = memoryIdx !== -1 && memoriesData.length > 1;
+        btnPrevMedia.style.display = showNav ? 'flex' : 'none';
+        btnNextMedia.style.display = showNav ? 'flex' : 'none';
+      }
+
+      // Reset positioning
+      panX = 0;
+      panY = 0;
+
+      // Show dialog via native showModal
+      if (typeof bannerModal.showModal === 'function') {
+        if (!bannerModal.open) bannerModal.showModal();
+      } else {
+        bannerModal.setAttribute('open', '');
+      }
+
+      // Calculate initial fit after modal is rendered
+      requestAnimationFrame(() => {
+        currentScale = calculateFitScale();
+        applyTransform(false);
+      });
+
+      // Sound & toast notification
+      sfx.playFanfare();
+      showToast(captionText ? '📸 Detail Kenangan Dibuka (Ultra HD)' : '🔍 Gambar Diperbesar Penuh (Ultra HD)');
+    }
+
+    // Navigate between memory photos
+    function navigateMemory(direction) {
+      if (activeMemoryIndex === -1 || memoriesData.length === 0) return;
+      let nextIdx = activeMemoryIndex + direction;
+      if (nextIdx < 0) nextIdx = memoriesData.length - 1;
+      if (nextIdx >= memoriesData.length) nextIdx = 0;
+
+      const item = memoriesData[nextIdx];
+      openViewer(item.src, item.title, item.res, item.w, item.h, item.desc, nextIdx);
+      sfx.playPop();
+    }
+
+    if (btnPrevMedia) btnPrevMedia.addEventListener('click', () => navigateMemory(-1));
+    if (btnNextMedia) btnNextMedia.addEventListener('click', () => navigateMemory(1));
+
+    // Wire up all memory cards
+    memoryCards.forEach((card, index) => {
+      const openCard = () => {
+        const item = memoriesData[index];
+        openViewer(item.src, item.title, item.res, item.w, item.h, item.desc, index);
+      };
+
+      card.addEventListener('click', openCard);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openCard();
+        }
+      });
+    });
+
+    // Close viewer and exit fullscreen if active
+    function closeViewer() {
+      if (document.fullscreenElement) {
+        document.exitFullscreen().catch(() => {});
+      }
+      bannerModal.close();
+    }
+
+    // Light-Dismiss Fallback (per Modern Web Guidance)
+    if (!('closedBy' in HTMLDialogElement.prototype)) {
+      bannerModal.addEventListener('click', (event) => {
+        if (event.target !== bannerModal) return;
+        const rect = modalShell.getBoundingClientRect();
+        const isInside = (
+          rect.top <= event.clientY &&
+          event.clientY <= rect.top + rect.height &&
+          rect.left <= event.clientX &&
+          event.clientX <= rect.left + rect.width
+        );
+        if (!isInside) closeViewer();
+      });
+    }
+
+    // Close button listener
+    if (btnCloseModal) {
+      btnCloseModal.addEventListener('click', closeViewer);
+    }
+
+    // Banner card click & keyboard triggers
+    if (mainBannerCard) {
+      mainBannerCard.addEventListener('click', () => {
+        openViewer(
+          'assets/Selamat Menempuh S2 di UPH.png',
+          '📸 Banner Wisuda Cindy — S2 di UPH',
+          '1774 × 887 PX',
+          1774,
+          887,
+          'Langkah baru, cerita baru, versi terbaik dari Cindy! Selamat menempuh S2 di UPH.',
+          -1
+        );
+      });
+
+      mainBannerCard.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openViewer(
+            'assets/Selamat Menempuh S2 di UPH.png',
+            '📸 Banner Wisuda Cindy — S2 di UPH',
+            '1774 × 887 PX',
+            1774,
+            887,
+            'Langkah baru, cerita baru, versi terbaik dari Cindy! Selamat menempuh S2 di UPH.',
+            -1
+          );
+        }
+      });
+    }
+
+    // Also support clicking spotlight photos for complete experience
+    const photoTiara = document.getElementById('photoTiara');
+    const photoCasual = document.getElementById('photoCasual');
+
+    if (photoTiara) {
+      photoTiara.style.cursor = 'zoom-in';
+      photoTiara.setAttribute('title', 'Klik untuk perbesar potret HD');
+      photoTiara.addEventListener('click', () => {
+        openViewer(
+          'assets/Potret Selfie Miss PPG Bertiarap.png',
+          '👑 Potret Selfie Miss PPG Bertiara — Cindy Agustiani S.H.',
+          '1254 × 1254 PX',
+          1254,
+          1254,
+          'Penobatan resmi Miss Maghub PPG: 100% Slay di segala situasi kantor!',
+          -1
+        );
+      });
+    }
+
+    if (photoCasual) {
+      photoCasual.style.cursor = 'zoom-in';
+      photoCasual.setAttribute('title', 'Klik untuk perbesar potret HD');
+      photoCasual.addEventListener('click', () => {
+        openViewer(
+          'assets/Screenshot 2026-10-19 135431.png',
+          '🌸 Cindy Agustiani S.H — Mode Briefing Casual Magang',
+          '500 × 500 PX',
+          500,
+          500,
+          'Cindy dalam mode briefing casual: siap tempur dan selalu penuh senyuman manis.',
+          -1
+        );
+      });
+    }
+
+    // Zoom In (+)
+    if (btnZoomIn) {
+      btnZoomIn.addEventListener('click', () => {
+        currentScale = Math.min(currentScale * 1.3, 4.5);
+        applyTransform(true);
+        sfx.playPop();
+      });
+    }
+
+    // Zoom Out (-)
+    if (btnZoomOut) {
+      btnZoomOut.addEventListener('click', () => {
+        currentScale = Math.max(currentScale / 1.3, 0.25);
+        applyTransform(true);
+        sfx.playPop();
+      });
+    }
+
+    // Fit Layar (Reset to full aspect fit)
+    if (btnFitScreen) {
+      btnFitScreen.addEventListener('click', () => {
+        currentScale = calculateFitScale();
+        panX = 0;
+        panY = 0;
+        applyTransform(true);
+        sfx.playPop();
+        showToast('🔄 Tampilan disesuaikan dengan layar');
+      });
+    }
+
+    // 100% Asli (Pixel-to-pixel native sharpness)
+    if (btnActualSize) {
+      btnActualSize.addEventListener('click', () => {
+        currentScale = 1.0;
+        panX = 0;
+        panY = 0;
+        applyTransform(true);
+        sfx.playPop();
+        showToast('🎯 Resolusi Asli 100% (Pixel-to-Pixel Paling Tajam)');
+      });
+    }
+
+    // 200% Detail Zoom
+    if (btnZoom2x) {
+      btnZoom2x.addEventListener('click', () => {
+        currentScale = 2.0;
+        panX = 0;
+        panY = 0;
+        applyTransform(true);
+        sfx.playPop();
+        showToast('🔬 Zoom 200%: Detail tulisan & gambar lebih jelas');
+      });
+    }
+
+    // Toggle Ultra-HD Clarity Enhancement Filter ("Memperjelas Gambarnya")
+    if (btnToggleHD) {
+      btnToggleHD.addEventListener('click', () => {
+        isHdActive = !isHdActive;
+        if (isHdActive) {
+          modalImage.classList.add('hd-enhanced');
+          btnToggleHD.classList.add('active');
+          if (hdBtnLabel) hdBtnLabel.textContent = 'Mode Jernih: Aktif';
+          if (modalHdTag) {
+            modalHdTag.textContent = '✨ MODE ULTRA HD AKTIF';
+            modalHdTag.classList.remove('hd-off');
+          }
+          showToast('✨ Mode Ultra HD Aktif: Gambar diperjelas & lebih tajam!');
+        } else {
+          modalImage.classList.remove('hd-enhanced');
+          btnToggleHD.classList.remove('active');
+          if (hdBtnLabel) hdBtnLabel.textContent = 'Mode Jernih: Mati';
+          if (modalHdTag) {
+            modalHdTag.textContent = 'MODE STANDAR';
+            modalHdTag.classList.add('hd-off');
+          }
+          showToast('Mode Standar Aktif');
+        }
+        sfx.playPop();
+      });
+    }
+
+    // Toggle Fullscreen
+    if (btnToggleFullscreen) {
+      btnToggleFullscreen.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+          if (modalShell.requestFullscreen) {
+            modalShell.requestFullscreen().catch(() => {});
+          }
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen().catch(() => {});
+          }
+        }
+      });
+    }
+
+    // Mouse Pan / Drag
+    modalViewport.addEventListener('mousedown', (e) => {
+      // Don't drag if clicked on button or child controls
+      if (e.target.closest('button')) return;
+      isDragging = true;
+      dragStartX = e.clientX - panX;
+      dragStartY = e.clientY - panY;
+      modalViewport.classList.add('is-dragging');
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      panX = e.clientX - dragStartX;
+      panY = e.clientY - dragStartY;
+      applyTransform(false);
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (isDragging) {
+        isDragging = false;
+        modalViewport.classList.remove('is-dragging');
+      }
+    });
+
+    // Touch Pan & Pinch Zoom for Mobile / Tablets
+    let initialTouchDist = 0;
+    let initialScale = 1;
+
+    modalViewport.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        isDragging = true;
+        dragStartX = e.touches[0].clientX - panX;
+        dragStartY = e.touches[0].clientY - panY;
+      } else if (e.touches.length === 2) {
+        isDragging = false;
+        initialTouchDist = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+        initialScale = currentScale;
+      }
+    }, { passive: true });
+
+    modalViewport.addEventListener('touchmove', (e) => {
+      if (isDragging && e.touches.length === 1) {
+        panX = e.touches[0].clientX - dragStartX;
+        panY = e.touches[0].clientY - dragStartY;
+        applyTransform(false);
+      } else if (e.touches.length === 2 && initialTouchDist > 0) {
+        const dist = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+        const ratio = dist / initialTouchDist;
+        currentScale = Math.min(Math.max(initialScale * ratio, 0.25), 4.5);
+        applyTransform(false);
+      }
+    }, { passive: true });
+
+    modalViewport.addEventListener('touchend', () => {
+      isDragging = false;
+      initialTouchDist = 0;
+    });
+
+    // Mouse Wheel Zoom
+    modalViewport.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const zoomFactor = e.deltaY < 0 ? 1.15 : 0.88;
+      currentScale = Math.min(Math.max(currentScale * zoomFactor, 0.25), 4.5);
+      applyTransform(false);
+    }, { passive: false });
+
+    // Double-Click Quick Zoom Toggle
+    modalViewport.addEventListener('dblclick', (e) => {
+      if (e.target.closest('button')) return;
+      const fit = calculateFitScale();
+      if (currentScale <= fit * 1.25) {
+        currentScale = 1.6;
+      } else {
+        currentScale = fit;
+        panX = 0;
+        panY = 0;
+      }
+      applyTransform(true);
+      sfx.playPop();
+    });
+
+    // Keyboard Shortcuts inside Modal
+    window.addEventListener('keydown', (e) => {
+      if (!bannerModal.open) return;
+
+      if (e.key === '+' || e.key === '=') {
+        currentScale = Math.min(currentScale * 1.25, 4.5);
+        applyTransform(true);
+      } else if (e.key === '-' || e.key === '_') {
+        currentScale = Math.max(currentScale / 1.25, 0.25);
+        applyTransform(true);
+      } else if (e.key === '0' || e.key.toLowerCase() === 'f') {
+        currentScale = calculateFitScale();
+        panX = 0;
+        panY = 0;
+        applyTransform(true);
+      } else if (e.key === '1') {
+        currentScale = 1.0;
+        panX = 0;
+        panY = 0;
+        applyTransform(true);
+      } else if (e.key.toLowerCase() === 'h') {
+        if (btnToggleHD) btnToggleHD.click();
+      } else if (e.key === 'ArrowLeft') {
+        navigateMemory(-1);
+      } else if (e.key === 'ArrowRight') {
+        navigateMemory(1);
+      }
+    });
+
+    // Window resize handler to maintain proper fit if in fit mode
+    window.addEventListener('resize', () => {
+      if (bannerModal.open && Math.abs(currentScale - calculateFitScale()) < 0.05) {
+        currentScale = calculateFitScale();
+        applyTransform(false);
+      }
+    });
+  }
 });
